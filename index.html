@@ -22,7 +22,6 @@
             justify-content: center;
             align-items: center;
             position: relative;
-            cursor: none;
         }
 
         @keyframes gradientShift {
@@ -49,14 +48,8 @@
         }
 
         @keyframes float {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100px) rotate(360deg);
-                opacity: 0;
-            }
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
         }
 
         .container {
@@ -71,7 +64,6 @@
             font-size: 80px;
             margin: 20px 0;
             animation: sparkle 2s infinite;
-            display: block;
         }
 
         @keyframes sparkle {
@@ -91,69 +83,64 @@
             font-size: 1.2em;
             color: white;
             line-height: 1.6;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             animation: fadeInUp 1s ease-out 0.3s both;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
         }
 
         .btn {
-            position: relative;
-            background: linear-gradient(45deg, #ff6b9d, #c44569);
+            background: linear-gradient(45deg, #00d4aa, #00b894);
             color: white;
             border: none;
-            padding: 15px 40px;
-            font-size: 1.2em;
+            padding: 18px 50px;
+            font-size: 1.3em;
             border-radius: 50px;
             cursor: pointer;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             transition: all 0.3s ease;
             font-family: 'Georgia', serif;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            position: relative;
             z-index: 20;
             user-select: none;
-            animation: fadeInUp 1s ease-out 0.6s both;
         }
 
-        .btn.yes-btn {
-            background: linear-gradient(45deg, #00d4aa, #00b894);
-            font-size: 1.3em;
-            padding: 18px 50px;
+        .yes-btn {
+            animation: pulse 2s infinite;
+            font-size: 1.4em !important;
+            padding: 20px 60px !important;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 10px 30px rgba(0,212,170,0.5); }
+            50% { box-shadow: 0 0 50px rgba(0,212,170,0.8); }
+            100% { box-shadow: 0 10px 30px rgba(0,212,170,0.5); }
         }
 
         .btn:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 12px 35px rgba(0,0,0,0.4);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
         }
 
-        .btn:active {
-            transform: translateY(-1px) scale(1.02);
-        }
-
+        /* NO BUTTON - THE MAGIC! */
         .no-btn {
-            pointer-events: none !important;
             position: fixed !important;
-            z-index: 15 !important;
-            animation: none !important;
-            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        }
-
-        .no-btn.moving {
-            animation: dodge 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        }
-
-        @keyframes dodge {
-            0% { transform: translate(0, 0) rotate(0deg); }
-            25% { transform: translate(30vw, -20vh) rotate(5deg); }
-            50% { transform: translate(-20vw, 10vh) rotate(-5deg); }
-            75% { transform: translate(15vw, -15vh) rotate(3deg); }
-            100% { transform: translate(-10vw, 5vh) rotate(-2deg); }
+            top: 50% !important;
+            left: 50% !important;
+            transform: translate(-50%, -50%);
+            z-index: 15;
+            background: linear-gradient(45deg, #fd79a8, #e84393) !important;
+            padding: 15px 40px !important;
+            font-size: 1.2em !important;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
+            animation: wiggle 2s infinite !important;
         }
 
         @keyframes wiggle {
-            0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(5deg); }
-            75% { transform: rotate(-5deg); }
+            0%, 100% { transform: translate(-50%, -50%) rotate(0deg); }
+            25% { transform: translate(-50%, -50%) rotate(3deg); }
+            75% { transform: translate(-50%, -50%) rotate(-3deg); }
         }
 
         .countdown {
@@ -166,83 +153,39 @@
             font-weight: bold;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
             z-index: 20;
-            animation: fadeInDown 1s ease-out;
         }
 
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         @media (max-width: 480px) {
             h1 { font-size: 2em; }
             .ring { font-size: 60px; }
-            .message { font-size: 1.1em; }
-            .btn { padding: 12px 30px; font-size: 1.1em; }
+            .btn { padding: 15px 35px; font-size: 1.1em; }
         }
 
-        .fireworks {
+        .fireworks, .celebration {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 25;
+            z-index: 30;
             display: none;
-        }
-
-        .firework {
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            animation: explode 1.2s ease-out forwards;
-        }
-
-        @keyframes explode {
-            0% {
-                transform: scale(0);
-                opacity: 1;
-            }
-            100% {
-                transform: scale(1) translate(var(--dx), var(--dy));
-                opacity: 0;
-            }
         }
 
         .celebration {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.7);
-            backdrop-filter: blur(15px);
-            display: none;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(20px);
             flex-direction: column;
             justify-content: center;
             align-items: center;
             color: white;
             text-align: center;
-            z-index: 30;
+            pointer-events: all;
         }
 
         .celebration.active,
@@ -254,36 +197,30 @@
             font-size: 4em;
             margin-bottom: 30px;
             animation: bounce 1s infinite;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
-        }
-
-        .celebration p {
-            font-size: 1.5em;
-            margin: 10px 0;
+            text-shadow: 3px 3px 10px rgba(0,0,0,0.8);
         }
 
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-30px); }
-            60% { transform: translateY(-15px); }
+            40% { transform: translateY(-40px); }
+            60% { transform: translateY(-20px); }
         }
 
-        .custom-cursor {
-            position: fixed;
-            width: 30px;
-            height: 30px;
-            background: rgba(255,255,255,0.8);
+        .firework {
+            position: absolute;
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
-            pointer-events: none;
-            z-index: 100;
-            mix-blend-mode: difference;
-            transition: transform 0.1s ease;
+            animation: explode 1.5s ease-out forwards;
+        }
+
+        @keyframes explode {
+            0% { transform: scale(0); opacity: 1; }
+            100% { transform: scale(1) translate(var(--dx), var(--dy)); opacity: 0; }
         }
     </style>
 </head>
 <body>
-    <div class="custom-cursor" id="cursor"></div>
-    
     <div class="countdown" id="countdown">Loading love... 💕</div>
     
     <div class="hearts" id="hearts"></div>
@@ -291,21 +228,21 @@
     <div class="fireworks" id="fireworks"></div>
     
     <div class="celebration" id="celebration">
-        <h2>🎉 SHE SAID YES! 🎉</h2>
-        <p>💍 I LOVE YOU FOREVER! 💍</p>
-        <p style="font-size: 2em;">Our forever starts NOW! ✨</p>
+        <h2>🎉 YES FOREVER! 🎉</h2>
+        <p style="font-size: 2em;">💍 I LOVE YOU ENDLESSLY 💍</p>
+        <p>Our adventure together begins NOW! ✨</p>
     </div>
 
     <div class="container">
         <div class="ring">💍</div>
         <h1 id="proposalText">[Her Name], Will You Marry Me?</h1>
         <p class="message" id="messageText">
-            From the moment I met you, I knew you were my forever. 
-            Every day with you feels like a dream. 
-            I want to spend the rest of my life making you happy.
+            You've made every moment magical. 
+            I want to spend eternity loving you.
+            Say YES to our forever! 💕
         </p>
-        <button class="btn yes-btn" id="yesBtn" onclick="sayYes()">
-            YES! 💕💍
+        <button class="btn yes-btn" onclick="sayYes()">
+            YES! 💍💕
         </button>
         <button class="btn no-btn" id="noBtn">
             No way! 😱
@@ -315,140 +252,131 @@
     <script>
         // Personalize
         const herName = prompt("Enter her name:") || "My Love";
-        const customMessage = prompt("Enter custom message (optional):") || 
-            "From the moment I met you, I knew you were my forever. Every day with you feels like a dream. I want to spend the rest of my life making you happy.";
-        
         document.getElementById('proposalText').textContent = `${herName}, Will You Marry Me?`;
-        document.getElementById('messageText').textContent = customMessage;
+        document.getElementById('messageText').textContent = 
+            `You've made every moment magical. I want to spend eternity loving ${herName}. Say YES to our forever! 💕`;
 
         const noBtn = document.getElementById('noBtn');
-        const yesBtn = document.getElementById('yesBtn');
-        const cursor = document.getElementById('cursor');
+        let dodgeCount = 0;
+        const dodgeTexts = [
+            "No way! 😱", "Try again! 🥺", "You know you want to! 💕", 
+            "Pretty please? 😍", "Forever awaits! ✨", "I dare you! 😉",
+            "Can't run from love! ❤️", "Say YES already! 🥰"
+        ];
 
-        // Custom cursor
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX - 15 + 'px';
-            cursor.style.top = e.clientY - 15 + 'px';
+        // **THE MAGIC DODGE EFFECT**
+        noBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
         });
 
-        // Make NO button unclickable & moving
-        let noClickCount = 0;
-        noBtn.addEventListener('mouseenter', function(e) {
-            noClickCount++;
+        noBtn.addEventListener('mousedown', function(e) {
+            dodgeCount++;
+            e.preventDefault();
             
-            // Move button away
+            // Get mouse position relative to button
             const rect = this.getBoundingClientRect();
-            const x = (e.clientX - rect.left) / rect.width;
-            const y = (e.clientY - rect.top) / rect.height;
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
             
-            let moveX = (x - 0.5) * -150;
-            let moveY = (y - 0.5) * -150;
+            // Calculate dodge direction (opposite of click)
+            const dodgeX = (x / rect.width - 0.5) * 200;
+            const dodgeY = (y / rect.height - 0.5) * 200;
             
-            this.style.transform = `translate(${moveX}px, ${moveY}px) rotate(${Math.sin(noClickCount) * 10}deg)`;
-            this.style.background = `linear-gradient(45deg, hsl(${270 + noClickCount * 5}, 70%, 60%), hsl(${300 + noClickCount * 3}, 70%, 55%))`;
+            // Move button AWAY from click
+            this.style.transform = `translate(${dodgeX}px, ${dodgeY}px) rotate(${Math.sin(dodgeCount) * 15}deg) scale(0.95)`;
             
-            this.classList.add('moving');
-            setTimeout(() => this.classList.remove('moving'), 500);
+            // Change text & color
+            this.textContent = dodgeTexts[dodgeCount % dodgeTexts.length];
+            this.style.background = `linear-gradient(45deg, hsl(${300 + dodgeCount * 8}, 75%, 65%), hsl(${330 + dodgeCount * 5}, 75%, 60%))`;
             
-            // Change text playfully
-            const texts = ['Try again! 🥺', 'You can\'t escape love! 💕', 'Pretty please? 😍', 'I dare you! 😉', 'Forever awaits! ✨'];
-            this.textContent = texts[noClickCount % texts.length];
+            // Shake YES button
+            document.querySelector('.yes-btn').style.animation = 'wiggle 0.4s ease-in-out';
+            setTimeout(() => {
+                document.querySelector('.yes-btn').style.animation = 'pulse 2s infinite';
+            }, 400);
             
-            // Shake YES button encouragingly
-            yesBtn.style.animation = 'wiggle 0.3s ease-in-out';
-            setTimeout(() => yesBtn.style.animation = '', 300);
+            // Return to wiggle after dodge
+            setTimeout(() => {
+                this.style.transform = 'translate(-50%, -50%) rotate(0deg) scale(1)';
+            }, 600);
+            
+            return false;
         });
 
-        // Prevent right-click & context menu
-        document.addEventListener('contextmenu', e => e.preventDefault());
-        noBtn.addEventListener('contextmenu', e => e.preventDefault());
+        // Continuous wiggle animation
+        setInterval(() => {
+            if (!document.getElementById('celebration').classList.contains('active')) {
+                noBtn.style.transform = `translate(-50%, -50%) rotate(${Math.sin(Date.now() * 0.001) * 5}deg)`;
+            }
+        }, 100);
 
         // Floating hearts
         function createHeart() {
             const heart = document.createElement('div');
             heart.className = 'heart';
-            heart.innerHTML = ['💖', '💕', '💗', '💝', '✨', '🌟'][Math.floor(Math.random() * 6)];
+            heart.innerHTML = ['💖','💕','💗','💝','✨','🌟'][Math.floor(Math.random()*6)];
             heart.style.left = Math.random() * 100 + '%';
-            heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            heart.style.animationDuration = (Math.random()*3 + 4) + 's';
             document.getElementById('hearts').appendChild(heart);
             setTimeout(() => heart.remove(), 7000);
         }
-
-        setInterval(createHeart, 250);
+        setInterval(createHeart, 200);
 
         // Countdown
         let count = 3;
         const countdownEl = document.getElementById('countdown');
-        const countdownInterval = setInterval(() => {
+        const interval = setInterval(() => {
             count--;
             if (count > 0) {
-                countdownEl.textContent = `Almost ready... ${count}`;
+                countdownEl.textContent = `Get ready... ${count}`;
             } else {
-                countdownEl.textContent = '💕 Say YES! 💕';
+                countdownEl.textContent = '💕 Click YES! 💕';
                 countdownEl.style.color = '#00d4aa';
-                setTimeout(() => countdownEl.style.display = 'none', 2000);
-                clearInterval(countdownInterval);
+                setTimeout(() => countdownEl.remove(), 2000);
+                clearInterval(interval);
             }
-        }, 1000);
+        }, 800);
 
-        // YES function
+        // YES - VICTORY!
         function sayYes() {
-            document.body.style.cursor = 'default';
-            cursor.style.display = 'none';
+            document.querySelector('.container').style.display = 'none';
+            noBtn.style.display = 'none';
             
-            document.getElementById('fireworks').classList.add('active');
-            document.getElementById('celebration').classList.add('active');
+            const celebration = document.getElementById('celebration');
+            const fireworks = document.getElementById('fireworks');
+            
+            celebration.classList.add('active');
+            fireworks.classList.add('active');
+            celebration.querySelector('h2').textContent = `🎉 ${herName.toUpperCase()} SAID YES! 🎉`;
+            
             createFireworks();
             
-            // Victory hearts explosion
-            for(let i = 0; i < 100; i++) {
-                setTimeout(() => createHeart(), i * 30);
+            // Heart explosion
+            for(let i = 0; i < 200; i++) {
+                setTimeout(createHeart, i * 20);
             }
-            
-            // Confetti text
-            setTimeout(() => {
-                document.querySelector('.celebration h2').innerHTML = 
-                    '🎉 ' + herName.toUpperCase() + ' SAID YES! 🎉';
-            }, 500);
         }
 
         function createFireworks() {
             const fireworks = document.getElementById('fireworks');
-            for(let i = 0; i < 150; i++) {
+            for(let i = 0; i < 200; i++) {
                 setTimeout(() => {
-                    const firework = document.createElement('div');
-                    firework.className = 'firework';
-                    firework.style.left = Math.random() * 100 + '%';
-                    firework.style.top = Math.random() * 100 + '%';
-                    
+                    const fw = document.createElement('div');
+                    fw.className = 'firework';
+                    fw.style.left = Math.random() * 100 + '%';
+                    fw.style.top = Math.random() * 100 + '%';
                     const angle = Math.random() * Math.PI * 2;
-                    const distance = 150 + Math.random() * 250;
-                    firework.style.setProperty('--dx', `${Math.cos(angle) * distance}px`);
-                    firework.style.setProperty('--dy', `${Math.sin(angle) * distance}px`);
-                    
-                    const colors = ['#ff6b9d', '#4ecdc4', '#45b7d1', '#f9ca24', '#ff9f43', '#00d4aa', '#fd79a8'];
-                    firework.style.background = colors[Math.floor(Math.random() * colors.length)];
-                    
-                    fireworks.appendChild(firework);
-                    setTimeout(() => firework.remove(), 1200);
-                }, i * 15);
+                    const dist = 200 + Math.random() * 300;
+                    fw.style.setProperty('--dx', `${Math.cos(angle) * dist}px`);
+                    fw.style.setProperty('--dy', `${Math.sin(angle) * dist}px`);
+                    fw.style.background = ['#ff6b9d','#00d4aa','#f9ca24','#fd79a8','white','#45b7d1'][Math.floor(Math.random()*6)];
+                    fireworks.appendChild(fw);
+                    setTimeout(() => fw.remove(), 1500);
+                }, i * 10);
             }
         }
-
-        // Auto-share after celebration
-        setTimeout(() => {
-            if (confirm('Share this magical moment? 📱💕')) {
-                if (navigator.share) {
-                    navigator.share({
-                        title: herName + ' said YES! 💍',
-                        text: 'She said YES! Our forever begins! ✨',
-                        url: window.location.href
-                    });
-                } else {
-                    prompt('Copy this link to share your joy:\n' + window.location.href);
-                }
-            }
-        }, 8000);
     </script>
 </body>
 </html>
