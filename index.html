@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Marry Me? 💍</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            overflow: hidden;
+            background: linear-gradient(45deg, #ff6b9d, #c44569, #f8b500, #ff9f43);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            color: #ff69b4;
+            font-size: 20px;
+            animation: float 6s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            text-align: center;
+            max-width: 400px;
+            padding: 20px;
+            z-index: 10;
+            position: relative;
+        }
+
+        .ring {
+            font-size: 80px;
+            margin: 20px 0;
+            animation: sparkle 2s infinite;
+            display: block;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(10deg); }
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .message {
+            font-size: 1.2em;
+            color: white;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease-out 0.3s both;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #ff6b9d, #c44569);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2em;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            font-family: 'Georgia', serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.4);
+        }
+
+        .btn:active {
+            transform: translateY(-1px);
+        }
+
+        .yes-btn {
+            background: linear-gradient(45deg, #00d4aa, #00b894);
+            margin-right: 10px;
+        }
+
+        .no-btn {
+            background: linear-gradient(45deg, #fd79a8, #e84393);
+            opacity: 0.8;
+        }
+
+        .countdown {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 1.1em;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            z-index: 20;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 2em; }
+            .ring { font-size: 60px; }
+            .message { font-size: 1.1em; }
+        }
+
+        .fireworks {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 15;
+            display: none;
+        }
+
+        .firework {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #fff;
+            border-radius: 50%;
+            animation: explode 1s ease-out forwards;
+        }
+
+        @keyframes explode {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1) translate(var(--dx), var(--dy));
+                opacity: 0;
+            }
+        }
+
+        .celebration {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            display: none;
+            z-index: 25;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+
+        .celebration.active,
+        .fireworks.active {
+            display: flex;
+        }
+
+        .celebration h2 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-20px); }
+            60% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="countdown" id="countdown">Loading love... 💕</div>
+    
+    <div class="hearts" id="hearts"></div>
+    
+    <div class="fireworks" id="fireworks"></div>
+    
+    <div class="celebration" id="celebration">
+        <h2>🎉 YES! 🎉</h2>
+        <p>I love you more than words can say! 💍❤️</p>
+        <p style="font-size: 1.5em; margin-top: 20px;">Let's spend forever together! ✨</p>
+    </div>
+
+    <div class="container">
+        <div class="ring">💍</div>
+        <h1 id="proposalText">[Her Name], Will You Marry Me?</h1>
+        <p class="message" id="messageText">
+            From the moment I met you, I knew you were my forever. 
+            Every day with you feels like a dream. 
+            I want to spend the rest of my life making you happy.
+        </p>
+        <div>
+            <button class="btn yes-btn" onclick="sayYes()">YES! 💕</button>
+            <button class="btn no-btn" onclick="sayNo()">Not yet 😅</button>
+        </div>
+    </div>
+
+    <script>
+        // Personalize
+        const herName = prompt("Enter her name:") || "My Love";
+        const customMessage = prompt("Enter custom message (optional):") || 
+            "From the moment I met you, I knew you were my forever. Every day with you feels like a dream. I want to spend the rest of my life making you happy.";
+        
+        document.getElementById('proposalText').textContent = `${herName}, Will You Marry Me?`;
+        document.getElementById('messageText').textContent = customMessage;
+
+        // Floating hearts
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = ['💖', '💕', '💗', '💝', '✨'][Math.floor(Math.random() * 5)];
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            document.getElementById('hearts').appendChild(heart);
+            
+            setTimeout(() => heart.remove(), 7000);
+        }
+
+        setInterval(createHeart, 300);
+
+        // Countdown
+        let count = 3;
+        const countdownEl = document.getElementById('countdown');
+        const countdownInterval = setInterval(() => {
+            count--;
+            if (count > 0) {
+                countdownEl.textContent = `Loading love... ${count}`;
+            } else {
+                countdownEl.style.display = 'none';
+                clearInterval(countdownInterval);
+            }
+        }, 1000);
+
+        // Functions
+        function sayYes() {
+            document.getElementById('fireworks').classList.add('active');
+            document.getElementById('celebration').classList.add('active');
+            createFireworks();
+            
+            // Hearts explode
+            for(let i = 0; i < 50; i++) {
+                setTimeout(createHeart, i * 50);
+            }
+        }
+
+        function sayNo() {
+            const buttons = document.querySelectorAll('.btn');
+            buttons[0].textContent = 'Pretty Please? 🥺';
+            buttons[0].style.background = 'linear-gradient(45deg, #fdcb6e, #e17055)';
+            buttons[1].textContent = 'Try Again 💕';
+        }
+
+        function createFireworks() {
+            const fireworks = document.getElementById('fireworks');
+            for(let i = 0; i < 100; i++) {
+                setTimeout(() => {
+                    const firework = document.createElement('div');
+                    firework.className = 'firework';
+                    firework.style.left = Math.random() * 100 + '%';
+                    firework.style.top = Math.random() * 100 + '%';
+                    
+                    const angle = Math.random() * Math.PI * 2;
+                    const distance = 100 + Math.random() * 200;
+                    firework.style.setProperty('--dx', `${Math.cos(angle) * distance}px`);
+                    firework.style.setProperty('--dy', `${Math.sin(angle) * distance}px`);
+                    
+                    const colors = ['#ff6b9d', '#4ecdc4', '#45b7d1', '#f9ca24', '#ff9f43'];
+                    firework.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    
+                    fireworks.appendChild(firework);
+                    setTimeout(() => firework.remove(), 1000);
+                }, i * 20);
+            }
+        }
+
+        // Share button for social media
+        setTimeout(() => {
+            if (confirm('Share this moment? 📱')) {
+                if (navigator.share) {
+                    navigator.share({
+                        title: 'Will You Marry Me?',
+                        text: 'Check out my proposal! 💍',
+                        url: window.location.href
+                    });
+                } else {
+                    prompt('Copy this link to share:\n' + window.location.href);
+                }
+            }
+        }, 5000);
+    </script>
+</body>
+</html>
